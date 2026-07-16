@@ -1,3 +1,5 @@
+import type {Poke} from "./poke.model"
+
 let poke1Name:string;
 let poke2Name:string;
 let poke1Speed:number;
@@ -9,7 +11,7 @@ function getPokePoke(apiURL:string){
     .then(data => console.log(data.name, data.stats[5].stat.name,data.stats[5].base_stat))
 }
 
-async function getPokemons(apiURL:string){
+async function getPokemons(apiURL:string): Promise<Poke>{
     let response = await fetch(apiURL);
     if(response.status!=200){
         console.log("Oskour")
@@ -22,9 +24,10 @@ async function getPokemons(apiURL:string){
         console.log(pokemons.stats[i].base_stat);
     }
     poke1Speed=pokemons.stats[5].base_stat;
+    return pokemons;
 }
 
-async function getPoke(apiURL:string){
+async function getPoke(apiURL:string): Promise<Poke>{
     try{
         let response = await fetch(apiURL);
         let data = await response.json();
@@ -36,6 +39,7 @@ async function getPoke(apiURL:string){
             console.log(data.stats[i].base_stat);
         }
         poke2Speed=data.stats[5].base_stat;
+        return data;
     } catch(error){
         throw error;
     }

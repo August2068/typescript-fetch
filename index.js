@@ -22,6 +22,7 @@ async function getPokemons(apiURL) {
         console.log(pokemons.stats[i].base_stat);
     }
     poke1Speed = pokemons.stats[5].base_stat;
+    return pokemons;
 }
 async function getPoke(apiURL) {
     try {
@@ -34,6 +35,7 @@ async function getPoke(apiURL) {
             console.log(data.stats[i].base_stat);
         }
         poke2Speed = data.stats[5].base_stat;
+        return data;
     }
     catch (error) {
         throw error;
